@@ -10,4 +10,64 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} 
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+ button,
+ input,
+ label{
+  display: block;
+  border: 1px solid silver;
+  white-space: nowrap;
+  padding: 10px;
+ }
+
+.conteiner {
+  
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.add-todo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+.add-todo_input{
+  width: 100%;
+} 
+
+.user-action{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.todo-list{
+  margin-top: 20px;
+  border-top: 3px solid red;
+}
+
+.todo-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+} 
+
+.todo-item:nth-child(even){
+  background-color: aliceblue;
+} 
+
+.line-throgh{
+  text-decoration: line-through;
+  font-style: italic;
+}
+
