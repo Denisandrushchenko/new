@@ -11,6 +11,11 @@ function App() {
     { id: 4, body: 'Learn Js', comleted: false }
   ])
 
+  const removeTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+
+  }
+
 
   const toggleCompleted = (id) => {
     setTodos(
@@ -24,24 +29,42 @@ function App() {
     )
   }
 
+  const editTodo = (id, text) => {
+
+  
+    setTodos(todos.map(todo => {
+      if (id === todo.id) {
+        return {
+          ...todo,
+          body: text
+        }
+      }
+      return todo
+    }))
+  }
+
   const addTodo = body => {
-       const id = todos[todos.length - 1].id  + 1
-       setTodos([...todos , {id , body , comleted: false}]);
+
+    let id
+
+    todos.length ? id = todos[todos.length - 1].id + 1 : id = 1
+
+    setTodos([...todos, { id, body, comleted: false }]);
   }
 
   return (
     <div className="conteiner">
       <h1> ToDoApp </h1>
-      <AddTodo addTodo = {addTodo}>
+      <AddTodo addTodo={addTodo} />
 
-      </AddTodo>
+
       <div className="todos">
 
-        <TodoList todos={todos} toggleCompleted={toggleCompleted}>
+        {todos.length ? <TodoList todos={todos} toggleCompleted={toggleCompleted} removeTodo={removeTodo} editTodo={editTodo} /> : <h2> no todos  </h2>}
 
 
 
-        </TodoList>
+
 
 
 

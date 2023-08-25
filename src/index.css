@@ -71,3 +71,7 @@ code {
   font-style: italic;
 }
 
+.btn-icon_del{
+   display: block;
+   transform: rotate(45deg);
+}
