@@ -1,15 +1,21 @@
 
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, body: 'Learn Js', comleted: false },
-    { id: 2, body: 'Learn Js', comleted: false },
-    { id: 3, body: 'Learn Js', comleted: false },
-    { id: 4, body: 'Learn Js', comleted: false }
-  ])
+  const [todos, setTodos] = useState([ ])  
+
+  useEffect( () => { 
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    .then(response => response.json())
+    .then(todos =>  {
+      setTodos(todos)
+      
+    })
+  } ,  [])
+
+   
 
   const removeTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id))
@@ -36,20 +42,20 @@ function App() {
       if (id === todo.id) {
         return {
           ...todo,
-          body: text
+          title: text
         }
       }
       return todo
     }))
   }
 
-  const addTodo = body => {
+  const addTodo = title=> {
 
     let id
 
     todos.length ? id = todos[todos.length - 1].id + 1 : id = 1
 
-    setTodos([...todos, { id, body, comleted: false }]);
+    setTodos([...todos, { id, title, comleted: false }]);
   }
 
   return (

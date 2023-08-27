@@ -3,9 +3,9 @@ import { useState } from "react";
 
 const TodoItem = function ({ todo, index, toggleCompleted, removeTodo, editTodo }) {
 
-    const { id, body, completed } = todo;
+    const { id, title , completed } = todo;
     const [edit, setEdit] = useState(false)
-    const [text, setText] = useState(body)
+    const [text, setText] = useState(title)
 
     function editHandler() {
         setEdit(!edit)
@@ -20,7 +20,7 @@ const TodoItem = function ({ todo, index, toggleCompleted, removeTodo, editTodo 
         <li className={completed ? "todo-item  line-throgh" : "todo-item"}>
             <input onChange={() => toggleCompleted(id)} checked={completed} type="checkbox" className="todo-item_complited" />
             <span className="todo-item_number" > {index + 1}</span>
-            {!edit ? <p className="todo-item_text">  {body} </p> : <input onChange={e => setText(e.target.value)} value={text} />}
+            {!edit ? <p className="todo-item_text">  {title} </p> : <input onChange={e => setText(e.target.value)} value={text} />}
 
             <div className="user-action">
                 <button onClick={editHandler}> {!edit ? ' edit ' : 'save' } </button>
