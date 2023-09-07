@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Context from "../context";
 
+const TodoItem = function ({ todo, index }) {
+    
+    const { removeTodo, toggleCompleted, editTodo } = useContext(Context)
 
-const TodoItem = function ({ todo, index, toggleCompleted, removeTodo, editTodo }) {
-
-    const { id, title , completed } = todo;
+    const { id, title, completed } = todo;
     const [edit, setEdit] = useState(false)
     const [text, setText] = useState(title)
 
@@ -23,7 +25,7 @@ const TodoItem = function ({ todo, index, toggleCompleted, removeTodo, editTodo 
             {!edit ? <p className="todo-item_text">  {title} </p> : <input onChange={e => setText(e.target.value)} value={text} />}
 
             <div className="user-action">
-                <button onClick={editHandler}> {!edit ? ' edit ' : 'save' } </button>
+                <button onClick={editHandler}> {!edit ? ' edit ' : 'save'} </button>
                 <button className="btn-icon user-action_del" onClick={() => removeTodo(todo.id)}> <span className="btn-icon_del">  + </span>  </button>
             </div>
         </li>
