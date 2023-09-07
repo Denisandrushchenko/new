@@ -2,20 +2,21 @@
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import { useEffect, useState } from "react";
+import Context from "./context";
 
 function App() {
-  const [todos, setTodos] = useState([ ])  
+  const [todos, setTodos] = useState([])
 
-  useEffect( () => { 
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-    .then(response => response.json())
-    .then(todos =>  {
-      setTodos(todos)
-      
-    })
-  } ,  [])
+      .then(response => response.json())
+      .then(todos => {
+        setTodos(todos)
 
-   
+      })
+  }, [])
+
+
 
   const removeTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id))
@@ -37,7 +38,7 @@ function App() {
 
   const editTodo = (id, text) => {
 
-  
+
     setTodos(todos.map(todo => {
       if (id === todo.id) {
         return {
@@ -49,7 +50,7 @@ function App() {
     }))
   }
 
-  const addTodo = title=> {
+  const addTodo = title => {
 
     let id
 
@@ -59,25 +60,20 @@ function App() {
   }
 
   return (
-    <div className="conteiner">
-      <h1> ToDoApp </h1>
-      <AddTodo addTodo={addTodo} />
+    <Context.Provider value={{ removeTodo, toggleCompleted, editTodo , addTodo ,  todos }}>
+      <div className="conteiner">
+        <h1> ToDoApp </h1>
+        <AddTodo/>
 
 
-      <div className="todos">
+        <div className="todos">
 
-        {todos.length ? <TodoList todos={todos} toggleCompleted={toggleCompleted} removeTodo={removeTodo} editTodo={editTodo} /> : <h2> no todos  </h2>}
+          {todos.length ? <TodoList /> : <h2> no todos  </h2>}
 
-
-
-
-
-
+        </div>
 
       </div>
-
-    </div>
-
+    </Context.Provider>
   );
 }
 

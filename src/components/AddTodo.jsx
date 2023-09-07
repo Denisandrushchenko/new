@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Context from "../context";
 
 
-const AddTodo = function ({ addTodo }) {
 
+const AddTodo = function () {
+   const addTodo = useContext(Context)
    const [body, setBody] = useState('');
 
    const addBtnHandler = (text) => {
-      if(text == ""){
+      if(text === ""){
          alert("value is empty")
       } 
       else{
